@@ -5,37 +5,37 @@ DB = Sequel.connect(connection_string)                                          
 #######################################################################################
 
 # Database schema - this should reflect your domain model
-DB.create_table! :events do
+DB.create_table! :professors do
   primary_key :id
   String :title
   String :description, text: true
-  String :date
+  String :quarter
   String :location
 end
-DB.create_table! :rsvps do
-  primary_key :id
-  foreign_key :event_id
+DB.create_table! :feedback do
+  primary_key :feedback_id
+  foreign_key :professor_id
   foreign_key :user_id
-  Boolean :going
   String :comments, text: true
 end
 DB.create_table! :users do
-  primary_key :id
+  primary_key :users_id
+  Boolean :current_student
   String :name
   String :email
   String :password
 end
 
 # Insert initial (seed) data
-events_table = DB.from(:events)
+professors_table = DB.from(:professors)
 
-events_table.insert(title: "Bacon Burger Taco Fest", 
-                    description: "Here we go again bacon burger taco fans, another Bacon Burger Taco Fest is here!",
-                    date: "June 21",
-                    location: "Kellogg Global Hub")
+professors_table.insert(title: "Professor Yay", 
+                    description: "This guy is amazing and will teach you how to grow the heck our of your brand",
+                    quarter: "Spring 2020",
+                    location: "Evanston")
 
-events_table.insert(title: "Kaleapolooza", 
-                    description: "If you're into nutrition and vitamins and stuff, this is the event for you.",
-                    date: "July 4",
-                    location: "Nowhere")
+professors_table.insert(title: "Professor Nay", 
+                    description: "This guy is a bore, but he'll show you how to build one hell of an Excel model...if that's your thing",
+                    quarter: "Summer 2020",
+                    location: "Chicago")
 puts "Success"

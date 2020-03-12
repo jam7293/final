@@ -14,8 +14,12 @@ before { puts; puts "--------------- NEW REQUEST ---------------"; puts }       
 after { puts; }                                                                       #
 #######################################################################################
 
-events_table = DB.from(:events)
-rsvps_table = DB.from(:rsvps)
+# events = professors
+# rsvps = feedback
+# users = users
+
+professors_table = DB.from(:professors)
+feedback_table = DB.from(:feedback)
 users_table = DB.from(:users)
 
 before do
@@ -24,26 +28,26 @@ end
 
 get "/" do
     puts events_table.all
-    @events = events_table.all.to_a
-    view "events"
+    @professors = professors_table.all.to_a
+    view "professors"
 end
 
-get "/events/:id" do
-    @event = events_table.where(id: params[:id]).to_a[0]
-    @rsvps = rsvps_table.where(event_id: @event[:id])
-    @going_count = rsvps_table.where(event_id: @event[:id], going: true).count
+get "/professors/:id" do
+    @professors = professors_table.where(id: params[:id]).to_a[0]
+    @feedback = feedback_table.where(professors_id: @professors[:id])
+    @going_count = feedback_table.where(professor_id: @professors[:id], review: true).count
     @users_table = users_table
-    view "event"
+    view "professors"
 end
 
-get "/events/:id/rsvps/new" do
-    @event = events_table.where(id: params[:id]).to_a[0]
-    view "new_rsvp"
+get "/professors/:id/feedback/new" do
+    @professors = professors_table.where(id: params[:id]).to_a[0]
+    view "new_feedback"
 end
 
-get "/events/:id/rsvps/create" do
+get "/professors/:id/feedback/create" do
     puts params
-    @event = events_table.where(id: params["id"]).to_a[0]
+    @professors = professors_table.where(id: params["id"]).to_a[0]
     rsvps_table.insert(event_id: params["id"],
                        user_id: session["user_id"],
                        going: params["going"],
