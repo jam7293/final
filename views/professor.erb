@@ -21,16 +21,16 @@
         <% end %>
         <p class="mt-5">
             <% if @current_user %>
-                <a href="/professors/<%= @event[:id] %>/feedback/new" class="btn btn-primary">Leave feedback now!</a>
+                <a href="/professors/<%= @professors[:id] %>/feedback/new" class="btn btn-primary">Leave feedback now!</a>
             <% else %>
                 <a href="/logins/new" class="btn btn-danger">Please sign in to provide feedback</a>
             <% end %>
         </p>
     </div>
     <div class="col-sm-3">
-        <h3>Quarters Teaching</h3>
+        <h3>Quarters</h3>
         <p><%= @professors[:date] %></p>
-        <h3>Campus Teaching?</h3>
+        <h3>Campus</h3>
         <p><%= @professors[:location] %></p>
         <h3>How many reviews?</h3>
         <p><%= @review_count %></p>
