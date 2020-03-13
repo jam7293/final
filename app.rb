@@ -24,11 +24,11 @@ feedback_table = DB.from(:feedback)
 users_table = DB.from(:users)
 
 before do
-    @current_user = users_table.where(id: session["user_id"]).to_a[0]
+    @current_user = users_table.where(users_id: session["user_id"]).to_a[0]
 end
 
 get "/" do
-    puts professors_table.all
+    #puts professors_table.all
     @professors = professors_table.all.to_a
     view "professors"
 end
@@ -36,9 +36,9 @@ end
 get "/professors/:id" do
     @professors = professors_table.where(id: params[:id]).to_a[0]
     @feedback = feedback_table.where(professors_id: @professors[:id])
-    @review_count = feedback_table.where(professor_id: @professors[:id], review: true).count
+    @review_count = feedback_table.where(professors_id: @professors[:id], review: true).count
     @users_table = users_table
-    view "professors"
+    view "professor"
 end
 
 get "/professors/:id/feedback/new" do
