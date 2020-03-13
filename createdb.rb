@@ -14,7 +14,7 @@ DB.create_table! :professors do
 end
 DB.create_table! :feedback do
   primary_key :feedback_id
-  foreign_key :professor_id
+  foreign_key :professors_id
   foreign_key :user_id
   String :comments, text: true
 end

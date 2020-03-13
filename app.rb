@@ -36,7 +36,7 @@ end
 get "/professors/:id" do
     @professors = professors_table.where(id: params[:id]).to_a[0]
     @feedback = feedback_table.where(professors_id: @professors[:id])
-    @review_count = feedback_table.where(professors_id: @professors[:id], review: true).count
+    @feedback_count = feedback_table.where(professors_id: @professors[:id], feedback: true).count
     @users_table = users_table
     view "professor"
 end
@@ -51,7 +51,7 @@ get "/professors/:id/feedback/create" do
     @professors = professors_table.where(id: params["id"]).to_a[0]
     feedback_table.insert(professor_id: params["id"],
                        user_id: session["user_id"],
-                       review: params["review"],
+                       feedback: params["feedback"],
                        comments: params["comments"])
     view "create_feedback"
 end
