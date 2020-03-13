@@ -49,10 +49,10 @@ end
 get "/professors/:id/feedback/create" do
     puts params
     @professors = professors_table.where(id: params["id"]).to_a[0]
-    feedback_table.insert(professor_id: params["id"],
+    feedback_table.insert(professors_id: params["id"],
                        user_id: session["user_id"],
                        feedback: params["feedback"],
-                       comments: params["comments"])
+                       feedback: params["feedback"])
     view "create_feedback"
 end
 
