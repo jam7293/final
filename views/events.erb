@@ -1,5 +1,5 @@
-<h1>All Events</h1>
+<h1>Professors</h1>
 
-<% for event in @events %>
-    <p><a href="/events/<%= event[:id] %>"><%= event[:title] %></a></p>
+<% for Professors in @Professors %>
+    <p><a href="/professors/<%= professors[:id] %>"><%= professors[:title] %></a></p>
 <% end %>

@@ -17,6 +17,7 @@ after { puts; }                                                                 
 # events = professors
 # rsvps = feedback
 # users = users
+# going = review
 
 professors_table = DB.from(:professors)
 feedback_table = DB.from(:feedback)
@@ -27,7 +28,7 @@ before do
 end
 
 get "/" do
-    puts events_table.all
+    puts professors_table.all
     @professors = professors_table.all.to_a
     view "professors"
 end
@@ -35,7 +36,7 @@ end
 get "/professors/:id" do
     @professors = professors_table.where(id: params[:id]).to_a[0]
     @feedback = feedback_table.where(professors_id: @professors[:id])
-    @going_count = feedback_table.where(professor_id: @professors[:id], review: true).count
+    @review_count = feedback_table.where(professor_id: @professors[:id], review: true).count
     @users_table = users_table
     view "professors"
 end
@@ -48,11 +49,11 @@ end
 get "/professors/:id/feedback/create" do
     puts params
     @professors = professors_table.where(id: params["id"]).to_a[0]
-    rsvps_table.insert(event_id: params["id"],
+    feedback_table.insert(professor_id: params["id"],
                        user_id: session["user_id"],
-                       going: params["going"],
+                       review: params["review"],
                        comments: params["comments"])
-    view "create_rsvp"
+    view "create_feedback"
 end
 
 get "/users/new" do
