@@ -15,11 +15,6 @@ before { puts; puts "--------------- NEW REQUEST ---------------"; puts }       
 after { puts; }                                                                       #
 #######################################################################################
 
-# events = professors
-# rsvps = feedback
-# users = users
-# going = review
-
 professors_table = DB.from(:professors)
 feedback_table = DB.from(:feedback)
 users_table = DB.from(:users)
