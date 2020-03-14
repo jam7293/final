@@ -1,10 +1,7 @@
 <div class="row">
     <div class="col-sm-9">
-        <h2>
-            <i class="far fa-calendar-alt"></i>
-            <%= @professors[:date] %>
-        </h2>
         <h1><%= @professors[:title] %></h1>
+        <h2><%= @professors[:subtitle] %></h2>
         <p><%= @professors[:description] %></p>
         <% for feedback in @feedback %>
             <div class="media">
@@ -33,13 +30,9 @@
         <h3>Campus</h3>
         <p><%= @professors[:location] %></p>
         <iframe
-        width="600"
-        height="450"
         frameborder="0" style="border:0"
         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw
         &q=<%= @lat_long %>&zoom=15" allowfullscreen>
         </iframe>
-        <h3>How many reviews?</h3>
-        <p><%= @review_count %></p>
     </div>
 </div>

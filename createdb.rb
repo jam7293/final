@@ -8,6 +8,7 @@ DB = Sequel.connect(connection_string)                                          
 DB.create_table! :professors do
   primary_key :id
   String :title
+  String :subtitle
   String :description, text: true
   String :quarter
   String :location
@@ -31,12 +32,14 @@ end
 professors_table = DB.from(:professors)
 
 professors_table.insert(title: "Professor Yay", 
-                    description: "This guy is amazing and will teach you how to grow the heck our of your brand",
+                    subtitle: "Associate Professor of Awesomeness",
+                    description: "This guy is amazing and will teach you how to grow the heck out of your brand",
                     quarter: "Spring 2020",
                     location: "Evanston",
                     address: "2211 Campus Dr, Evanston, IL 60208")
 
 professors_table.insert(title: "Professor Nay", 
+                    subtitle: "Associate Professor of Snoozeapalooza",
                     description: "This guy is a bore, but he'll show you how to build one hell of an Excel model...if that's your thing",
                     quarter: "Summer 2020",
                     location: "Chicago",

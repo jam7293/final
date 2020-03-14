@@ -1,8 +1,5 @@
-<h2>
-    <i class="far fa-calendar-alt"></i>
-    <%= @professors[:date] %>
-</h2>
 <h1>Feedback for <%= @professors[:title] %></h1>
+<h2><%= @professors[:subtitle] %></h2>
 
 <form action="/professors/<%= @professors[:id] %>/feedback/create">
   <div class="form-group">
