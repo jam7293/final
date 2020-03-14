@@ -11,6 +11,7 @@ DB.create_table! :professors do
   String :description, text: true
   String :quarter
   String :location
+  String :address
 end
 DB.create_table! :feedback do
   primary_key :feedback_id
@@ -32,10 +33,12 @@ professors_table = DB.from(:professors)
 professors_table.insert(title: "Professor Yay", 
                     description: "This guy is amazing and will teach you how to grow the heck our of your brand",
                     quarter: "Spring 2020",
-                    location: "Evanston")
+                    location: "Evanston",
+                    address: "2211 Campus Dr, Evanston, IL 60208")
 
 professors_table.insert(title: "Professor Nay", 
                     description: "This guy is a bore, but he'll show you how to build one hell of an Excel model...if that's your thing",
                     quarter: "Summer 2020",
-                    location: "Chicago")
+                    location: "Chicago",
+                    address: "340 E Superior St, Chicago, IL 60611")
 puts "Success"

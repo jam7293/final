@@ -5,6 +5,7 @@ require "sequel"                                                                
 require "logger"                                                                      #
 require "twilio-ruby"                                                                 #
 require "bcrypt"                                                                      #
+require "geocoder"                                                                     #
 connection_string = ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite3"  #
 DB ||= Sequel.connect(connection_string)                                              #
 DB.loggers << Logger.new($stdout) unless DB.loggers.size > 0                          #
@@ -38,6 +39,10 @@ get "/professors/:id" do
     @feedback = feedback_table.where(professors_id: @professors[:id])
     @feedback_count = feedback_table.where(professors_id: @professors[:id], feedback: true).count
     @users_table = users_table
+
+    results = Geocoder.search(@professors[:address])
+    intermediatestep = results.first.coordinates # => [lat, long]
+    @lat_long = "#{intermediatestep[0]},#{intermediatestep[1]}"
     view "professor"
 end
 
@@ -51,7 +56,7 @@ get "/professors/:id/feedback/create" do
     @professors = professors_table.where(id: params["id"]).to_a[0]
     feedback_table.insert(professors_id: params["id"],
                        user_id: session["user_id"],
-                       feedback: params["feedback"],
+                       #feedback: params["feedback"],
                        feedback: params["feedback"])
     view "create_feedback"
 end
