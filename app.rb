@@ -32,7 +32,6 @@ end
 get "/professors/:id" do
     @professors = professors_table.where(id: params[:id]).to_a[0]
     @feedback = feedback_table.where(professors_id: @professors[:id])
-    @feedback_count = feedback_table.where(professors_id: @professors[:id], feedback: true).count
     @users_table = users_table
 
     results = Geocoder.search(@professors[:address])
