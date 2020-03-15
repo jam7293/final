@@ -1,4 +1,4 @@
-.jumbotron {
+.jumbotron{
    background-color: purple;
    text-align: center;
 }
@@ -6,4 +6,10 @@
 .jumbotron h1{
     color: white;
     font-weight: bold;
+}
+h1, h3{
+    font-family: 'Bree Serif', serif;
+}
+h2{
+    font-family: 'Open Sans', sans-serif;
 }

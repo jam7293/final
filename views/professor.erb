@@ -3,12 +3,14 @@
         <h1><%= @professors[:title] %></h1>
         <h2><%= @professors[:subtitle] %></h2>
         <p><%= @professors[:description] %></p>
+        
+        <h1>Student Feedback</h1>
         <% for feedback in @feedback %>
             <div class="media">
                 <% if feedback[:feedback] %>
-                    <i class="fas fa-square-full 5x"></i>
+                    <i class="fas fa-square-full fa-3x mr-3"></i>
                 <% else %>
-                    <i class="fas fa-square-full 5x"></i>
+                    <i class="fas fa-square-full fa-3x mr-3"></i>
                 <% end %>
                 <div class="media-body">
                     <h5 class="mt-0"><%= @users_table.where(users_id: feedback[:user_id]).to_a[0][:name] %></h5>
